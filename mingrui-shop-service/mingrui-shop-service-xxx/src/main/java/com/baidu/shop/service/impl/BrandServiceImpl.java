@@ -46,7 +46,7 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
     public void setBrandMapper(BrandMapper brandMapper) {
         this.brandMapper = brandMapper;
     }
-
+    //品牌修改
     @Override
     public Result<JSONObject> editBrandInfo(BrandDTO brandDTO) {
 
