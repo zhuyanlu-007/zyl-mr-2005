@@ -90,7 +90,7 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
 
 
         Example example1 = new Example(CategoryEntity.class);
-        example1.createCriteria().andEqualTo("parentId", categoryEntity.getParentId());
+        example1.createCriteria().andEqualTo("parentId", id);
 
         List<CategoryBrandEntity> categoryBrandEntities = categoryBrandMapper.selectByExample(example1);
         if(categoryBrandEntities.size() != 0){
