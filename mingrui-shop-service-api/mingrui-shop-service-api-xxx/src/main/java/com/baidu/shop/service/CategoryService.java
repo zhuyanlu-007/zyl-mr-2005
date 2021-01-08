@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -19,20 +20,21 @@ import java.util.List;
  * @Version V1.0
  **/
 @Api(tags = "商品分类接口") // 声明接口
+@Validated
 public interface CategoryService {
 
     @ApiOperation(value = "通过pid查询商品分类")
     @GetMapping(value = "category/list")
-    Result<List<CategoryEntity>> getCategoryByPid(Integer pid);
+    Result<List<CategoryEntity>> getCategoryByPid(@NotNull Integer pid);
 
 
     @ApiOperation(value = "通过品牌id查询分类信息")
     @GetMapping(value = "category/brand")
-    Result<List<CategoryEntity>> getCategoryByBrandId(Integer brandId);
+    Result<List<CategoryEntity>> getCategoryByBrandId(@NotNull Integer brandId);
 
     @ApiOperation(value = "通过id删除分类")
     @DeleteMapping(value = "/category/delete")
-    Result<JsonObject> deleteCategoryById(Integer id);
+    Result<JsonObject> deleteCategoryById(@NotNull Integer id);
 
     //@RequestBody 接收前台传递过来的参数(参数必须得是string类型的字符串[json]) "{}" {}
     @ApiOperation(value = "更新")

@@ -51,14 +51,17 @@ public class SpuDTO extends BaseDTO {
 
     //不需要验证,新增时直接设置默认值
     @ApiModelProperty(value = "是否上架，0下架，1上架", example = "1")
+    @NotNull(message = "是否上架不能为空",groups = {MingruiOperation.Add.class ,MingruiOperation.Update.class})
     private Integer saleable;
 
     //不需要验证,新增时直接设置默认值
     @ApiModelProperty(value = "是否有效，0已删除，1有效", example = "1")
+    @NotNull(message = "是否有效不能为空",groups = {MingruiOperation.Add.class ,MingruiOperation.Update.class})
     private Integer valid;
 
     //不需要验证,新增时直接设置默认值
     @ApiModelProperty(value = "添加时间")
+    @NotNull(message = "添加时间不能为空",groups = {MingruiOperation.Add.class,MingruiOperation.Update.class})
     private Date createTime;
 
     //不需要验证,新增时直接设置默认值,修改时使用java代码赋值

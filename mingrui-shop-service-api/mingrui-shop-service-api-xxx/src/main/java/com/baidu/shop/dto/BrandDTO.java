@@ -34,5 +34,6 @@ public class BrandDTO extends BaseDTO {
     private Character letter;
 
     @ApiModelProperty(value = "品牌id集合")
+    @NotEmpty(message = "品牌id不能为空",groups = {MingruiOperation.Update.class,MingruiOperation.Add.class})
     private String categories;
 }

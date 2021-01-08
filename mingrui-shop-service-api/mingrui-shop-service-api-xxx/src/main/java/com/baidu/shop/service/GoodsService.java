@@ -6,13 +6,14 @@ import com.baidu.shop.dto.SkuDTO;
 import com.baidu.shop.dto.SpuDTO;
 import com.baidu.shop.entity.SpuDetailEntity;
 import com.baidu.shop.entity.SpuEntity;
+import com.baidu.shop.validate.group.MingruiOperation;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -24,6 +25,7 @@ import java.util.List;
  * @Version V1.0 7
  **/
 @Api(tags = "商品接口")
+@Validated
 public interface GoodsService {
 
     @ApiOperation(value = "查询spu信息")
@@ -32,13 +34,26 @@ public interface GoodsService {
 
     @ApiOperation(value = "新增商品")
     @PostMapping(value = "/goods/save")
-    Result<JSONObject> saveGoods(@RequestBody SpuDTO spuDTO);
+    Result<JSONObject> saveGoods(@Validated({MingruiOperation.Add.class})@RequestBody SpuDTO spuDTO);
+
+    @ApiOperation(value = "修改商品")
+    @PutMapping(value = "/goods/save")
+    Result<JSONObject> editGoods(@Validated({MingruiOperation.Update.class})@RequestBody SpuDTO spuDTO);
+
+    @ApiOperation(value = "删除商品")
+    @DeleteMapping(value = "/goods/delete")
+    Result<JSONObject> deleteGoods(@NotNull Integer spuId);
 
     @ApiOperation(value = "通过spuId查询spudetail信息")
     @GetMapping(value = "/goods/getSpuDetailBySpuId")
-    Result<SpuDetailEntity> getSpuDetailBySpuId(Integer spuId);
+    Result<SpuDetailEntity> getSpuDetailBySpuId(@NotNull Integer spuId);
 
     @ApiOperation(value = "通过spuId查询sku信息")
     @GetMapping(value = "/goods/getSkusBySpuId")
-    Result<List<SkuDTO>> getSkusBySpuId(Integer spuId);
+    Result<List<SkuDTO>> getSkusBySpuId(@NotNull Integer spuId);
+
+    //上下架
+    @ApiOperation(value="上下架商品")
+    @PutMapping(value = "goods/sxjGoods")
+    Result<JSONObject> sxjGoods(@RequestBody SpuDTO spuDTO);
 }
